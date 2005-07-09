@@ -204,6 +204,8 @@ static NSArray * iconArray = nil;
 		[self setLastUpdate:[NSDate distantPast]];
 		[self setLastUpdateString:@""];
 		[self setUsername:@""];
+		[self setPassword:@""];
+		[self setBloglinesId:MA_NonBloglines_Folder];
 	}
 	return self;
 }
@@ -361,6 +363,22 @@ static NSArray * iconArray = nil;
 	[attributes setValue:newUsername forKey:@"Username"];
 }
 
+/* password
+ * Returns the feed password.
+ */
+-(NSString *)password
+{
+	return [attributes valueForKey:@"Password"];
+}
+
+/* setPassword
+ * Sets the password associated with this feed.
+ */
+-(void)setPassword:(NSString *)newPassword
+{
+	[attributes setValue:newPassword forKey:@"Password"];
+}
+
 /* lastUpdate
  * Return the date of the last update from the feed.
  */
@@ -438,6 +456,23 @@ static NSArray * iconArray = nil;
 -(void)setName:(NSString *)newName
 {
 	[attributes setValue:newName forKey:@"Name"];
+}
+
+/* bloglinesId
+ * Returns the Bloglines ID associated with this folder.
+ */
+-(long)bloglinesId
+{
+	return [[attributes valueForKey:@"BloglinesID"] longValue];
+}
+
+/* setBloglinesId
+ * Sets the Bloglines ID associated with this folder. The special constant MA_NonBloglines_Folder
+ * can be used to de-associate it with Bloglines.
+ */
+-(void)setBloglinesId:(long)newBloglinesId
+{
+	[attributes setValue:[NSNumber numberWithLong:newBloglinesId] forKey:@"BloglinesID"];
 }
 
 /* setType
