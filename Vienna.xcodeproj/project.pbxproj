@@ -1091,8 +1091,8 @@
 		F6D573021E26ACCB00CDA909 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/InfoWindow.xib; sourceTree = "<group>"; };
 		F6D573031E26ACCD00CDA909 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/InfoWindow.xib; sourceTree = "<group>"; };
 		F6D573041E26ACD000CDA909 /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/InfoWindow.xib; sourceTree = "<group>"; };
-		F6164C571E32A6660086261C /* DisclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclosureView.h; sourceTree = "<group>"; };
-		F6164C581E32A6660086261C /* DisclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclosureView.m; sourceTree = "<group>"; };
+		F6164C571E32A6660086261C /* DisclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisclosureView.h; path = src/DisclosureView.h; sourceTree = "<group>"; };
+		F6164C581E32A6660086261C /* DisclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisclosureView.m; path = src/DisclosureView.m; sourceTree = "<group>"; };
 		F61F2F611E33DC640097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F61F2F631E33DC770097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EmptyTrashWarning.strings; sourceTree = "<group>"; };
 		F61F2F651E33DC7E0097F29B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FeedCredentials.strings; sourceTree = "<group>"; };
