@@ -3319,10 +3319,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		[currentFilterTextField setHidden: YES];
 		[filterIconInStatusBarButton setHidden: YES];
+		[self setFilterBarState:NO withAnimation:NO];
 	}
 	else {
 		[currentFilterTextField setHidden: NO];
 		[filterIconInStatusBarButton setHidden: NO];
+		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:NO];
 	}
 }
 
@@ -3981,7 +3983,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(showHideFilterBar:))
 	{
-		if (self.filterBarVisible)
+		if ([Preferences standardPreferences].showFilterBar)
 			[menuItem setTitle:NSLocalizedString(@"Hide Filter Bar", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Show Filter Bar", nil)];
