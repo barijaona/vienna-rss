@@ -170,9 +170,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Initialise the plugin manager now that the UI is ready
 	pluginManager = [[PluginManager alloc] init];
 	[pluginManager resetPlugins];
-
-    // Set the initial filter bar state
-    [self setFilterBarState:prefs.showFilterBar withAnimation:NO];
 	
     // We need to register the handlers early to catch events fired on launch.
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
@@ -227,6 +224,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 		Preferences * prefs = [Preferences standardPreferences];
 
+		// Set the initial filter bar state
+		[self setFilterBarState:prefs.showFilterBar withAnimation:NO];
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
