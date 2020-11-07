@@ -18,6 +18,7 @@
 // 
 
 #import "HelperFunctions.h"
+#import "StringExtensions.h"
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
@@ -90,23 +91,28 @@ NSURL *_Nullable cleanedUpUrlFromString(NSString * theUrl)
     if (theUrl == nil) {
         urlToLoad = nil;
     } else {
-        // Try simple conversion first
-        urlToLoad = [NSURLComponents componentsWithString:theUrl].URL;
-        if (!urlToLoad) {
-            // Fallback : use WebKit to clean up user-entered URLs that might contain umlauts, diacritics
-            // and other IDNA related stuff in the domain, or whatever may hide in filenames and arguments
-            NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
-            [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-            @try
-            {
-                if ([pasteboard setString:theUrl forType:NSPasteboardTypeString]) {
-                    urlToLoad = [WebView URLFromPasteboard:pasteboard];
-                }
-            } @catch (NSException *exception)   {
-                urlToLoad = nil;
+        urlToLoad = urlFromUserString(theUrl);
+    }
+    return urlToLoad;
+}
+
+NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString) {
+    // Try simple conversion first
+    NSURL *urlToLoad = [NSURLComponents componentsWithString:urlString].URL;
+    if (urlToLoad == nil) {
+        // Fallback : use WebKit to clean up user-entered URLs that might contain umlauts, diacritics
+        // and other IDNA related stuff in the domain, or whatever may hide in filenames and arguments
+        NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
+        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+        @try
+        {
+            if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
+                urlToLoad = [WebView URLFromPasteboard:pasteboard];
             }
-            [pasteboard releaseGlobally];
+        } @catch (NSException *exception)   {
+            NSLog(@"Failed to convert URL for string %@", urlString);
         }
+        [pasteboard releaseGlobally];
     }
     return urlToLoad;
 }
