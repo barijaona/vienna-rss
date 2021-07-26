@@ -30,13 +30,15 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
                 return
             }
 
-            let (htmlPath, accessPath) = converter.prepareArticleDisplay(self.articles)
+            let htmlPath = converter.prepareArticleDisplay(self.articles)
 
-            webView.loadFileURL(htmlPath, allowingReadAccessTo: accessPath)
-            do {
-                try FileManager.default.removeItem(at: htmlPath)
-            } catch {
-               fatalError("Could not remove file \(htmlPath) because \(error)")
+            webView.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                do {
+                    try FileManager.default.removeItem(at: htmlPath)
+                } catch {
+                    NSLog("Could not remove file \(htmlPath) because \(error)")
+                }
             }
         }
     }
