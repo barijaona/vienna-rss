@@ -330,7 +330,7 @@
                 {	NSInteger toAdd = row - rowHeightArray.count ;
                     for (NSInteger i = 0 ; i < toAdd ; i++)
                     {
-                        [rowHeightArray addObject:@DEFAULT_CELL_HEIGHT];
+                        [rowHeightArray addObject:@(0)];
                     }
                     [rowHeightArray addObject:@(fittingHeight)];
                 }
@@ -405,7 +405,7 @@
                           } else {
                               NSInteger toAdd = row - self->rowHeightArray.count;
                               for (NSInteger i = 0; i < toAdd; i++) {
-                                  [self->rowHeightArray addObject:@DEFAULT_CELL_HEIGHT];
+                                  [self->rowHeightArray addObject:@(0)];
                               }
                               [self->rowHeightArray addObject:@(fittingHeight)];
                           }
@@ -778,7 +778,7 @@
 	{
 		NSInteger toAdd = row - rowHeightArray.count + 1 ;
 		for (NSInteger i = 0 ; i < toAdd ; i++) {
-			[rowHeightArray addObject:@(DEFAULT_CELL_HEIGHT)];
+			[rowHeightArray addObject:@(0)];
 		}
 		return (CGFloat)DEFAULT_CELL_HEIGHT;
 	}
