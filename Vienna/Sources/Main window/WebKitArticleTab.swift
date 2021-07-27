@@ -37,7 +37,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
                 do {
                     try FileManager.default.removeItem(at: htmlPath)
                 } catch {
-                    NSLog("Could not remove file \(htmlPath) because \(error)")
                 }
             }
         }
