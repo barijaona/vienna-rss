@@ -502,15 +502,6 @@
 	return self;
 }
 
-/* webView
- * Returns the webview used to display the articles
- */
--(id<ArticleContentView>)webView
-{
-	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:YES];
-	return cellView.articleView;
-}
-
 /* performFindPanelAction
  * Implement the search action.
  */
