@@ -75,17 +75,16 @@ extension BrowserTab: RSSSource {
     func handleNavigationEndRss(success: Bool) {
         // use javascript to detect RSS feed link
         // TODO: deal with multiple links
-        waitForAsyncExecution { finishHandler in
-            self.webView.evaluateJavaScript(BrowserTab.extractRssLinkScript) { result, error in
-                if error == nil, let result = result as? [String] {
-                    // RSS feed link(s) detected
-                    self.rssUrls = result.compactMap { URL(string: $0 as String) }
-                } else {
-                    // error or no rss url available
-                    self.rssUrls = []
-                }
-                finishHandler()
+        self.webView.evaluateJavaScript(BrowserTab.extractRssLinkScript) { result, error in
+            if error == nil, let result = result as? [String] {
+                // RSS feed link(s) detected
+                self.rssUrls = result.compactMap { URL(string: $0 as String) }
+            } else {
+                // error or no rss url available
+                self.rssUrls = []
             }
+            self.refreshRSSState()
+            self.updateAddressBarButtons()
         }
     }
 }
