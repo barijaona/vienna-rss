@@ -86,6 +86,7 @@
 		2FF61D2C24F2AE8B00A7E2B5 /* RSSSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2B24F2AE8B00A7E2B5 /* RSSSubscriber.swift */; };
 		2FF61D2E24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2D24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift */; };
 		2FF61D3024F2ED1500A7E2B5 /* BrowserTab+Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF61D2F24F2ED1500A7E2B5 /* BrowserTab+Interface.swift */; };
+		2FFBEEBA26B6E3EF009883D5 /* SwiftSlug in Frameworks */ = {isa = PBXBuildFile; productRef = 2FFBEEB926B6E3EF009883D5 /* SwiftSlug */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */; };
 		3A0F2A55258FBB8B0036397F /* TabbedBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */; };
 		3A0F2A9E258FCB780036397F /* BrowserTab.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */; };
@@ -979,6 +980,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */,
+				2FFBEEBA26B6E3EF009883D5 /* SwiftSlug in Frameworks */,
 				F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */,
 				F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */,
 			);
@@ -1683,6 +1685,7 @@
 				F6B7BC3524A2A9A40051D76F /* FMDB */,
 				F69255992572A32900D387D8 /* MMTabBarView */,
 				F696D23D2561F9FC003DF0C0 /* Sparkle */,
+				2FFBEEB926B6E3EF009883D5 /* SwiftSlug */,
 			);
 			productInstallPath = "$(HOME)/Applications";
 			productName = Vienna;
@@ -1764,6 +1767,7 @@
 				F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */,
 				F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */,
 				F696D23C2561F9FC003DF0C0 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				2FFBEEB826B6E3EF009883D5 /* XCRemoteSwiftPackageReference "SwiftSlug" */,
 			);
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
@@ -3262,6 +3266,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2FFBEEB826B6E3EF009883D5 /* XCRemoteSwiftPackageReference "SwiftSlug" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/SwiftSlug";
+			requirement = {
+				kind = exactVersion;
+				version = 0.3.0;
+			};
+		};
 		F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ViennaRSS/MMTabBarView";
@@ -3289,6 +3301,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2FFBEEB926B6E3EF009883D5 /* SwiftSlug */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2FFBEEB826B6E3EF009883D5 /* XCRemoteSwiftPackageReference "SwiftSlug" */;
+			productName = SwiftSlug;
+		};
 		F69255992572A32900D387D8 /* MMTabBarView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */;

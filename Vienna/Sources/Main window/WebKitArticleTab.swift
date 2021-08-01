@@ -30,17 +30,17 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
                 return
             }
 
-            let htmlPath = converter.prepareArticleDisplay(self.articles)
+            deleteHtmlFiles()
 
-            webView.loadFileURL(htmlPath, allowingReadAccessTo: htmlPath.deletingLastPathComponent())
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                do {
-                    try FileManager.default.removeItem(at: htmlPath)
-                } catch {
-                }
-            }
+            let articleFileName = articles.count >= 1 ? "\(articles[0].guid)+\(articles.count)" : "dummy"
+            let (htmlPath, accessPath) = converter.prepareArticleDisplay(self.articles, articleFileName: articleFileName)
+            self.htmlPath = htmlPath
+
+            webView.loadFileURL(htmlPath, allowingReadAccessTo: accessPath)
         }
     }
+
+    var htmlPath: URL?
 
     override var tabUrl: URL? {
         get { super.tabUrl }
@@ -59,6 +59,17 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
     init() {
         super.init()
         self.webView.contextMenuProvider = self
+        self.registerNavigationEndHandler { [weak self] _ in self?.deleteHtmlFiles() }
+    }
+
+    func deleteHtmlFiles() {
+        guard let htmlPath = htmlPath else {
+            return
+        }
+        do {
+            try FileManager.default.removeItem(at: htmlPath)
+        } catch {
+        }
     }
 
     /// handle special keys when the article view has the focus
@@ -80,6 +91,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
     }
 
     func clearHTML() {
+        deleteHtmlFiles()
         self.url = URL.blank
         self.loadTab()
     }
@@ -236,5 +248,9 @@ class WebKitArticleTab: BrowserTab, ArticleContentView, CustomWKUIDelegate {
         if let url = menuItem.representedObject as? URL {
             NSApp.appController.openURL(inDefaultBrowser: url)
         }
+    }
+
+    deinit {
+        deleteHtmlFiles()
     }
 }

@@ -19,6 +19,7 @@
 
 import Foundation
 import WebKit
+import SwiftSlug
 
 class WebKitArticleConverter: ArticleConverter {
 
@@ -89,7 +90,11 @@ class WebKitArticleConverter: ArticleConverter {
         }
     }
 
-    func prepareArticleDisplay(_ articles: [Article]) -> (URL) {
+    func prepareArticleDisplay(_ articles: [Article]) -> (htmlPath: URL, accessPath: URL) {
+        prepareArticleDisplay(articles, articleFileName: "article.html")
+    }
+
+    func prepareArticleDisplay(_ articles: [Article], articleFileName: String) -> (htmlPath: URL, accessPath: URL) {
 
         guard !articles.isEmpty else {
             fatalError("an empty articles array cannot be presented")
@@ -97,17 +102,26 @@ class WebKitArticleConverter: ArticleConverter {
 
         let articleDirectory = getCachesPath()
 
-        let uuidFileName = NSUUID.init().uuidString.appending(".html")
-        let htmlPath = articleDirectory.appendingPathComponent(uuidFileName)
+        let sanitizedArticleFileName: String
+        do {
+            sanitizedArticleFileName = try articleFileName.convertedToSlug()
+        } catch {
+            fatalError("Could not convert article name \(articleFileName) to valid file name because \(error)")
+        }
+
+        let htmlPath = articleDirectory.appendingPathComponent(sanitizedArticleFileName + ".html")
 
         let articleHtml: String = self.articleText(from: articles)
 
         do {
+            if FileManager.default.fileExists(atPath: htmlPath.path) {
+                try FileManager.default.removeItem(at: htmlPath)
+            }
             try articleHtml.write(to: htmlPath, atomically: true, encoding: .utf8)
         } catch {
             fatalError("Could not write article as html file to \(htmlPath) because \(error)")
         }
 
-        return (htmlPath)
+        return (htmlPath, articleDirectory)
     }
 }
