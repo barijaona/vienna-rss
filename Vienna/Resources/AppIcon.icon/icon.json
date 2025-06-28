@@ -5,13 +5,20 @@
       "layers" : [
         {
           "image-name" : "icon_512x512@2x-flat.svg",
-          "name" : "icon_512x512@2x-flat"
+          "name" : "icon_512x512@2x-flat",
+          "position" : {
+            "scale" : 1.25,
+            "translation-in-points" : [
+              16,
+              0
+            ]
+          }
         }
       ],
       "position" : {
         "scale" : 1,
         "translation-in-points" : [
-          14,
+          0,
           0
         ]
       },
